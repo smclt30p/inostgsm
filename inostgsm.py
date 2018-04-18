@@ -5,21 +5,11 @@ import time
 from modem import ATModem
 from rpi import RPIGpio
 
+pi = RPIGpio()
+pi.setup()
+modem = ATModem()
 
 def main():
-
-    pi = RPIGpio()
-    pi.setup()
-
-    while True:
-        time.sleep(0.025)
-        pi.toggle()
-        time.sleep(0.025)
-        pi.toggle()
-
-    modem = ATModem()
-    print("sending test msg")
-    modem.sendSMS("+38766064783", "This is a test message");
 
     high = 0
 
@@ -39,6 +29,7 @@ def main():
             trigger_event(messages, high)
 
         print("checked {} msgs".format(len(messages)))
+        time.sleep(5)
 
 
 def highest_id(msgs):
@@ -50,8 +41,7 @@ def highest_id(msgs):
 
 
 def trigger_event(messages, index):
-    print("event triggered")
-    print(message)
+    pi.toggle()
 
 if __name__ == "__main__":
     main()
