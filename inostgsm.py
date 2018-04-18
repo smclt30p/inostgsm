@@ -12,7 +12,7 @@ class InostGSM():
     __msgHigh = 0
 
     def __init__(self):
-        self.rootLogger.debug("Starting InostGSM version {}".format(VERSION))
+        print("Starting InostGSM version {}".format(VERSION))
 
         self.loggerFmt = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
         self.rootLogger = logging.getLogger()
