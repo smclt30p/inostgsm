@@ -3,7 +3,7 @@ import logging
 
 from modem import ATModem
 from rpi import RPIGpio
-
+from logger import Logger
 
 VERSION = "1.0"
 
@@ -14,12 +14,7 @@ class InostGSM():
     def __init__(self):
         print("Starting InostGSM version {}".format(VERSION))
 
-        self.loggerFmt = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
-        self.rootLogger = logging.getLogger()
-        self.rootLogger.setLevel(logging.DEBUG)
-        self.logHandler = logging.StreamHandler()
-        self.logHandler.setFormatter(self.loggerFmt)
-        self.rootLogger.addHandler(self.logHandler)
+        self.rootLogger = Logger.getLogger()
 
         self.rootLogger.debug("Initializing GPIO library")
         self.pi = RPIGpio()

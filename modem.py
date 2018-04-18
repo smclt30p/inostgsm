@@ -5,12 +5,16 @@ import serial
 import time
 import re
 
+from logger import Logger
+
+
 class ATModem:
 
     sms = re.compile(r"CMGL:\s\d,\".+\",\"(.+)\",\"\",\"[0-9:+ /,]+\"\n\n(.*),\d,\d\n\n")
 
     def __init__(self):
         self.modem = serial.Serial("/dev/ttyACM0", baudrate=115200)
+        self.logger = Logger.getLogger()
 
     def close(self):
         if self.modem.is_open:
@@ -20,11 +24,11 @@ class ATModem:
 
         self.modem.write(b"AT+CMGF=1\r")
         time.sleep(0.5)
-        print(self.read_all())
+        self.logger.debug(self.read_all())
 
         self.modem.write(b"AT+CSCS=\"GSM\"\r")
         time.sleep(0.5)
-        print(self.read_all())
+        self.logger.debug(self.read_all())
 
         self.modem.write("AT+CMGS=\"{}\"\r".format(number).encode("ascii"))
         time.sleep(0.5)
@@ -32,13 +36,14 @@ class ATModem:
         time.sleep(0.5)
         self.modem.write(ascii.ctrl('z').encode("ascii"))
 
-        print(self.read_all())
+        self.logger.debug(self.read_all())
 
     def __check(self, modem):
+        self.logger.debug("Checking messages")
         time.sleep(0.5)
         ret = modem.read_all().decode("ascii")
         if "ERROR" in ret:
-            print("Sending failed, modem insane")
+            self.logger.error("Sending failed, modem insane")
             return True
         return False
 
