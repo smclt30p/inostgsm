@@ -43,7 +43,14 @@ class InostGSM():
             time.sleep(5)
 
     def defevent_trigger(self, messages, index):
-        self.rootLogger.debug("Triggered SMS event, message: ".format(messages[index]))
+        self.rootLogger.debug("Triggered SMS event")
+        self.rootLogger.debug(
+            "message: {}, id: {}, number: {}".format(
+                messages[index]["message"],
+                messages[index]["id"],
+                messages[index]["number"]
+            )
+        )
         pass
 
 def main():
