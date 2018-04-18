@@ -42,6 +42,7 @@ def highest_id(msgs):
 
 def trigger_event(messages, index):
     pi.toggle()
+    modem.sendSMS("+38765734503", str("Toggled!"))
 
 if __name__ == "__main__":
     main()
