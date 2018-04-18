@@ -21,3 +21,6 @@ class RPIGpio():
     def toggle(self):
         self.STATE = not self.STATE
         gpio.output(self.PIN, self.STATE)
+
+    def get_state(self):
+        return not self.STATE

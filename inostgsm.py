@@ -51,7 +51,23 @@ class InostGSM():
                 messages[index]["number"]
             )
         )
-        pass
+
+        self.rootLogger.debug("Triggering rpi output, flagging")
+        self.pi.toggle()
+
+        self.rootLogger.debug("Sending SMS feedback to {}".format(
+            messages[index]["number"]
+        ))
+
+        if self.pi.get_state():
+            msg = "Turned ON"
+        else:
+            msg = "Turned OFF"
+
+        self.modem.sendSMS(
+            messages[index]["number"],
+            msg
+        )
 
 def main():
     gsm = InostGSM()
