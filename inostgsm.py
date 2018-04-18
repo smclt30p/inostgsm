@@ -12,9 +12,9 @@ def main():
     pi.setup()
 
     while True:
-        time.sleep(0.1)
+        time.sleep(0.025)
         pi.toggle()
-        time.sleep(0.1)
+        time.sleep(0.025)
         pi.toggle()
 
     modem = ATModem()
