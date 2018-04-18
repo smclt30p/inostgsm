@@ -37,7 +37,12 @@ class InostGSM():
                 self.__msgHigh = self.highest_id(msgs)
                 continue
             if self.highest_id(msgs) > self.__msgHigh:
-                self.rootLogger.debug("Event triggered ({})".format(self.__msgHigh))
+                self.rootLogger.debug(
+                    "Event triggered at msgHigh: {}, highest_id: {} ".format(
+                        self.__msgHigh,
+                        self.highest_id(msgs)
+                    )
+                )
                 self.__msgHigh = self.highest_id(msgs)
                 self.defevent_trigger(msgs, self.__msgHigh - 1)
 
