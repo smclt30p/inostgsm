@@ -55,10 +55,12 @@ class ATModem:
         return False
 
     def wait_for_all(self):
+        self.logger.debug("Waiting for data from modem")
         current = self.modem.inWaiting()
         previous = current
         counter = 0
-        while counter < 3:
+        while counter < 5:
+            self.logger.debug("loop iteration")
             if current == previous:
                 time.sleep(0.5)
                 current = self.modem.inWaiting()
