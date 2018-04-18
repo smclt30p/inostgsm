@@ -1,5 +1,4 @@
 import time
-import logging
 
 from modem import ATModem
 from rpi import RPIGpio
@@ -18,7 +17,6 @@ class InostGSM():
         self.pi = RPIGpio()
         self.rootLogger.debug("Initializing AT library")
         self.modem = ATModem()
-        pass
 
     def highest_id(self, msgs):
         h = 0

@@ -22,14 +22,19 @@ class ATModem:
 
     def sendSMS(self, number: str, data: str):
 
+        self.logger.debug("Sending SMS messsage >{}< to {}".format(data, number))
+
+        self.logger.debug("AT+CMGF")
         self.modem.write(b"AT+CMGF=1\r")
         time.sleep(0.5)
         self.logger.debug(self.read_all())
 
+        self.logger.debug("AT+CSCS")
         self.modem.write(b"AT+CSCS=\"GSM\"\r")
         time.sleep(0.5)
         self.logger.debug(self.read_all())
 
+        self.logger.debug("AT+CMGS")
         self.modem.write("AT+CMGS=\"{}\"\r".format(number).encode("ascii"))
         time.sleep(0.5)
         self.modem.write(data.encode("ascii"))
@@ -37,6 +42,8 @@ class ATModem:
         self.modem.write(ascii.ctrl('z').encode("ascii"))
 
         self.logger.debug(self.read_all())
+
+        self.logger.debug("Message sent")
 
     def __check(self, modem):
         self.logger.debug("Checking messages")
