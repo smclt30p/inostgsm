@@ -16,6 +16,7 @@ class InostGSM():
 
         self.loggerFmt = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
         self.rootLogger = logging.getLogger()
+        self.rootLogger.setLevel(logging.DEBUG)
         self.logHandler = logging.StreamHandler()
         self.logHandler.setFormatter(self.loggerFmt)
         self.rootLogger.addHandler(self.logHandler)
