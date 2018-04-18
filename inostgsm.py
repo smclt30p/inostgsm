@@ -33,10 +33,11 @@ class InostGSM():
                 self.rootLogger.debug("Modem is insane, skipping iteration")
                 continue
             if self.__msgHigh == 0:
-                self.rootLogger.debug("Setting iniital mainloop ctr")
+                self.rootLogger.debug("Setting iniital mainloop ctr ({})".format(self.__msgHigh))
                 self.__msgHigh = self.highest_id(msgs)
                 continue
             if self.highest_id(msgs) > self.__msgHigh:
+                self.rootLogger.debug("Event triggered ({})".format(self.__msgHigh))
                 self.__msgHigh = self.highest_id(msgs)
                 self.defevent_trigger(msgs, self.__msgHigh - 1)
 
