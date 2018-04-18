@@ -47,9 +47,9 @@ class InostGSM():
     def defevent_trigger(self, messages):
         pass
 
-def trigger_event(messages, index):
-    pi.toggle()
-    modem.sendSMS("+38765734503", str("Toggled!"))
+def main():
+    gsm = InostGSM()
+    gsm.run()
 
 if __name__ == "__main__":
     main()
