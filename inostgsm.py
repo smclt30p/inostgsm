@@ -37,7 +37,7 @@ class InostGSM():
                 continue
             if self.highest_id(msgs) > self.__msgHigh:
                 self.__msgHigh = self.highest_id(msgs)
-                self.defevent_trigger(msgs, self.__msgHigh)
+                self.defevent_trigger(msgs, self.__msgHigh - 1)
 
             self.rootLogger.debug("mainloop iteration, checked {} SMS msgs".format(len(msgs)))
             time.sleep(5)
