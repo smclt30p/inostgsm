@@ -15,6 +15,7 @@ class InostGSM():
         self.rootLogger = Logger.getLogger()
         self.rootLogger.debug("Initializing GPIO library")
         self.pi = RPIGpio()
+        self.pi.setup()
         self.rootLogger.debug("Initializing AT library")
         self.modem = ATModem()
 
