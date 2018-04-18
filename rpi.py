@@ -7,6 +7,7 @@ class RPIGpio():
 
     def setup(self):
         gpio.setmode(gpio.BCM)
+        gpio.setwarnings(False)
         gpio.setup(self.PIN, gpio.OUT)
         gpio.output(self.PIN, self.STATE)
 
