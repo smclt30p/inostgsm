@@ -13,9 +13,7 @@ class InostGSM():
 
     def __init__(self):
         print("Starting InostGSM version {}".format(VERSION))
-
         self.rootLogger = Logger.getLogger()
-
         self.rootLogger.debug("Initializing GPIO library")
         self.pi = RPIGpio()
         self.rootLogger.debug("Initializing AT library")
@@ -41,12 +39,13 @@ class InostGSM():
                 continue
             if self.highest_id(msgs) > self.__msgHigh:
                 self.__msgHigh = self.highest_id(msgs)
-                self.defevent_trigger(msgs)
+                self.defevent_trigger(msgs, self.__msgHigh)
 
             self.rootLogger.debug("mainloop iteration, checked {} SMS msgs".format(len(msgs)))
             time.sleep(5)
 
-    def defevent_trigger(self, messages):
+    def defevent_trigger(self, messages, index):
+        self.rootLogger.debug("Triggered SMS event, message: ".format(messages[index]))
         pass
 
 def main():
