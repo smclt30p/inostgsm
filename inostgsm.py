@@ -1,9 +1,21 @@
 import sys
 
+import time
+
 from modem import ATModem
+from rpi import RPIGpio
 
 
 def main():
+
+    pi = RPIGpio()
+    pi.setup()
+
+    while True:
+        time.sleep(1)
+        pi.toggle()
+        time.sleep(1)
+        pi.toggle()
 
     modem = ATModem()
     print("sending test msg")
