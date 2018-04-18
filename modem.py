@@ -10,8 +10,6 @@ from logger import Logger
 
 class ATModem:
 
-    sms = re.compile(r"CMGL:\s\d,\".+\",\"(.+)\",\"\",\"[0-9:+ /,]+\"\n\n(.*),\d,\d\n\n")
-
     def __init__(self):
         self.modem = serial.Serial("/dev/ttyACM0", baudrate=115200)
         self.logger = Logger.getLogger()
@@ -61,7 +59,7 @@ class ATModem:
         counter = 0
         while counter < 5:
             if current == previous:
-                time.sleep(0.5)
+                time.sleep(1)
                 current = self.modem.inWaiting()
                 previous = current
                 counter += 1
